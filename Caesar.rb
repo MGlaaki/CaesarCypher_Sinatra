@@ -21,6 +21,6 @@ end
 
 get '/' do
   inputString = params["inputString"]
-  shiftFactor = params["shift"].to_i
+  shiftFactor = (params["sens"] == 'Cypher') ? params["shift"].to_i : params["shift"].to_i * -1
   erb :index, :locals => {:cyphered => cypher(inputString, shiftFactor), :input => inputString}
 end
