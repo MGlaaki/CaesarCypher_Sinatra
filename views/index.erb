@@ -1,14 +1,25 @@
-<html>
+<!DOCTYPE html>
   <head>
   </head>
 
   <body>
-    <p><%=inputString%></p>
+    <h1>Caesar Cypher</h1>
+
+    <p>Enter the text you want to cypher and press "go!"</p>
     <form>
-      <input type='text' name='inputString' />
+      <label type='text' name='inputString'>Secret Phrase</label>
+      <input type='text' name='inputString'  />
+      <label type='number' name='shift'>Shift Factor</label>
+      <input type='number' name='shift' min="1" max="25" value="1" />
       <input type='submit' value='Go!'/>
     </form>
-  </body>
 
+
+  <%if defined? cyphered and cyphered != ""%>
+    <p>The secret phrase is "<%=cyphered%>"</p>
+  <%end%>
+
+
+  </body>
 
 </html>

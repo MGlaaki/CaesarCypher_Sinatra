@@ -1,7 +1,7 @@
 require 'sinatra'
 require 'sinatra/reloader'
 
-def cypher(inputString)
+def cypher(inputString, shiftFactor=1)
   abc = "abcdefghijklmnopqrstuvwxyz"
   if inputString == nil
     return ""
@@ -11,16 +11,16 @@ def cypher(inputString)
     letterIn = inputString[pos].downcase
     if abc.include?(letterIn)
       indexIn = abc.index(letterIn)
-      indexOut = (indexIn + 1) % 26
+      indexOut = (indexIn + shiftFactor) % 26
       inputString[pos] = (inputString[pos] == letterIn) ? abc[indexOut] : abc[indexOut].upcase
     end
   end
-
 
   return inputString
 end
 
 get '/' do
   inputString = params["inputString"]
-  erb :index, :locals => {:inputString => cypher(inputString)}
+  shiftFactor = params["shift"].to_i
+  erb :index, :locals => {:cyphered => cypher(inputString, shiftFactor), :input => inputString}
 end
